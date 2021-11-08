@@ -1,25 +1,15 @@
 
-Work in Progress:
-  This is a work in progress, it works for smaller messages, or when you are
-  creating a new message. When replying to long messages, it appears it doesn't
-  work, well sometimes it does. When it doesn't work, it is hung in backend
-  trying to read data from TB, and will open all those windows when TB is 
-  exited (so don't hit many times when it doesn't work). I'll ask some JS/TB
-  plugin expert on some forum to help debug when I've a more time. 
-
-  Note to myself: port.postMessage() finishes but backend python is stuck on 
-                  stdin() read. Doesn't seem related to message sizes. Explore
-                  if there is a flush.
-
 WARNING: 
  - Will not work if following instructions are not followed exactly.
  - Python must be installed already. It looks for /usr/bin/python.
  - I am not a JS/python expert, am exteremely busy with my day job, and cannot
    provide much support. So, please use as is.
- - Tested on linux only using TB 78.10.2. No idea of how windows works.
+ - Tested on linux only using TB 78.10.2 and 78.12. No idea of how windows 
+   works.
 
 Instructions:
- 1. Create a directory where files will be copied, say: /usr/local/myed
+ 1. Create a directory where files will be copied, example (in my case):
+        /home/mrathor/sav/tbird/addons/tb-my-editor/github
 
  2. Copy/download tb-my-editor.xpi, backendMyEd.py, and tb-my-ed.cmd there.
 
@@ -31,14 +21,15 @@ Instructions:
 {
   "name": "backendMyEd",
   "description": "Use my personal editor for composing email",
-  "path": "/usr/local/myed/backendMyEd.py",
+  "path": "/home/mrathor/sav/tbird/addons/tb-my-editor/github/backendMyEd.py",
   "type": "stdio",
-  "allowed_extensions": ["todfod@gmail.com"]
+  "allowed_extensions": ["ca550b15-0391-458c-87e4-dfd0bbd6519f@stupidity.org"]
 }
-    Note:  path above is directory where you copied/downloaded the files.
+
+ Note:  path above is directory where you copied/downloaded the files.
 
 4. Finally, in thunderbird, load the addon by "Install Add-on from file", then
-   selecting the tb-my-editor.xpi file from /usr/local/myed.
+   selecting the tb-my-editor.xpi file.
 
 How it works:
  o The addon will run backendMyEd which will then run backendMyEd.py which will
@@ -58,8 +49,10 @@ Tmp Files: By default tmp files are NOT cleaned up because it has happened
            in past plugins where after spending significant time writing an
            email, saving it, exiting it, and poof everything is gone! Here, 
            if that happens the tmp file will still be there with the contents. 
-           Once in a while the time files can be cleaned up: make sure you 
-           are not editing file in external editor, and rm /tmp/tbird-vim-*
+
+           Once in a while the temp files can be cleaned up: 
+             - Quit TB
+             - rm /tmp/tbird-vim-*
 
 Enjoy!
 -Mukesh
